@@ -42,7 +42,7 @@ sudo systemctl restart elasticsearch.service
 curl -sS -X GET 'http://localhost:9200'
 
 # Enable trial license for all features
-curl -sS  -X POST "https://localhost:9200/_license/start_trial?acknowledge=true
+curl -sS  -X POST "https://localhost:9200/_license/start_trial?acknowledge=true"
 
 ###### Create index with mappings mirroring data types in ClickHouse
 
