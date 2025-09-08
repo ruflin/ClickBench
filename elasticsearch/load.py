@@ -10,7 +10,7 @@ INDEX = "hits"
 TOTAL_RECORDS = 99997497
 
 # Precompute action metadata line once
-ACTION_META_BYTES = (json.dumps({"index": {"_index": INDEX}}) + "\n").encode("utf-8")
+ACTION_META_BYTES = (json.dumps({"create": {"_index": INDEX}}) + "\n").encode("utf-8")
 REQUEST_TIMEOUT = 30  # seconds
 
 
