@@ -275,6 +275,12 @@
         "SilverlightVersion4": {
           "type": "short"
         },
+        "SocialAction": {
+          "type": "keyword"
+        },
+        "SocialNetwork": {
+          "type": "keyword"
+        },
         "SocialSourceNetworkID": {
           "type": "short"
         },
