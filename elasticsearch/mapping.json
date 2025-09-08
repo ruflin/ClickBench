@@ -1,6 +1,6 @@
 {
   "index_patterns": [
-    "hits"
+    "hit*"
   ],
   "data_stream": {},
   "priority": 100,
