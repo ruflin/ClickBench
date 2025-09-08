@@ -30,8 +30,6 @@ xpack.security.transport.ssl.enabled: false
 
 cluster.initial_master_nodes: ["clickbench"]
 http.host: 0.0.0.0
-
-xpack.license.self_generated.type: trial
 EOF
 
 sudo cp elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
@@ -43,6 +41,8 @@ sudo systemctl restart elasticsearch.service
 # Check Elasticsearch is alive - you should get a JSON response
 curl -sS -X GET 'http://localhost:9200'
 
+# Enable trial license for all features
+curl -sS  -X POST "https://localhost:9200/_license/start_trial?acknowledge=true
 
 ###### Create index with mappings mirroring data types in ClickHouse
 
