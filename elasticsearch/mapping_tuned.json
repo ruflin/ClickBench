@@ -13,16 +13,6 @@
       "index.mode": "logsdb"
     },
     "mappings": {
-      "dynamic_templates": [
-        {
-          "strings_as_keywords": {
-            "match_mapping_type": "string",
-            "mapping": {
-              "type": "keyword"
-            }
-          }
-        }
-      ],
       "properties": {
         "@timestamp": {
           "type": "date",
