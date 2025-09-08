@@ -8,11 +8,14 @@
     }
   },
    "mappings" : {
-      "properties" : {
-        "AdvEngineID" : {
-          "type" : "short"
-        },
-        "Age" : {
+    "_source": {
+      "enabled": false
+    },
+    "properties" : {
+      "AdvEngineID" : {
+        "type" : "short"
+      },
+      "Age" : {
           "type" : "short"
         },
         "BrowserCountry" : {
