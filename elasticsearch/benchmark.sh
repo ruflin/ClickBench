@@ -5,7 +5,7 @@ sudo apt-get update -y
 sudo apt-get install -y apt-transport-https ca-certificates wget gpg time jq bc
 
 # Add Elastic's signing key
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg --yes
 
 # Add the repository for version 9.x
 echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/9.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-9.x.list
@@ -48,13 +48,16 @@ curl -sS -X GET 'http://localhost:9200'
 
 # Note: Elasticsearch does not have the concept of a primary key, but it does have an "index sorting" feature, which is intended to help in analytical use cases where sort order on disk matters. I set it to the same parameters as primary key for the ClickHouse tests https://github.com/ClickHouse/ClickBench/blob/main/clickhouse/create.sql
 
+# Make sure to delete the index if it already exists
+curl -sS -X DELETE "http://localhost:9200/hits?pretty" -H 'Content-Type: application/json'
+
 curl -sS -X PUT "http://localhost:9200/hits?pretty" -H 'Content-Type: application/json' -d @mapping.json
 
 
 ###### Data loading (JSON dump via ES Bulk API insert)
 
 # Download the data
-#wget --continue --progress=dot:giga 'https://datasets.clickhouse.com/hits_compatible/hits.json.gz'
+wget --continue --progress=dot:giga --no-clobber 'https://datasets.clickhouse.com/hits_compatible/hits.json.gz'
 
 START=$(date +%s)
 
