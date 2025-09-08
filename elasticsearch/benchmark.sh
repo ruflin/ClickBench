@@ -30,6 +30,8 @@ xpack.security.transport.ssl.enabled: false
 
 cluster.initial_master_nodes: ["clickbench"]
 http.host: 0.0.0.0
+
+xpack.license.self_generated.type: trial
 EOF
 
 sudo cp elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
