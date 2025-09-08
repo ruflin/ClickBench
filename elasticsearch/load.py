@@ -53,6 +53,9 @@ def main():
                 if not docs:
                     break
                 batch_num += 1
+
+                # Rename the field `EventTime` to `@timestamp` for Elasticsearch LogsDB
+                docs = [doc.replace('"EventTime":', '"@timestamp":') for doc in docs]
                 total_docs += send_bulk(session, docs, batch_num)
                 pct = (total_docs / TOTAL_RECORDS) * 100 if TOTAL_RECORDS else 0
                 print(f" {pct:.2f}% ({total_docs}/{TOTAL_RECORDS})")
