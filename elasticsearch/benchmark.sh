@@ -70,7 +70,7 @@ if [ "$1" == "tuned" ]; then
 fi
 
 echo "Using mapping file: $MAPPING_FILE"
-curl -sS -X PUT "http://localhost:9200/hits?pretty" -H 'Content-Type: application/json' -d @$MAPPING_FILE
+curl -sS -X PUT "http://localhost:9200/_index_template/hits?pretty" -H 'Content-Type: application/json' -d @$MAPPING_FILE
 
 
 ###### Data loading (JSON dump via ES Bulk API insert)
