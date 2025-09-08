@@ -1,8 +1,13 @@
 {
-  "settings": {
-    "index.mode": "logsdb"
-  },
-   "mappings" : {
+  "index_patterns": [
+    "hits"
+  ],
+  "priority": 1,
+  "template": {
+    "settings": {
+      "index.mode": "logsdb"
+    },
+    "mappings" : {
       "properties" : {
         "@timestamp": {
           "type": "date",
@@ -323,4 +328,5 @@
         }
       }
     }  
+  }
 }

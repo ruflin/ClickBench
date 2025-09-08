@@ -1,21 +1,28 @@
 {
-  "settings": {
-    "index": {
-      "number_of_shards": 4,  
-      "number_of_replicas": 0, 
-      "sort.field": [ "CounterID", "EventDate", "UserID", "EventTime", "WatchID" ], 
-      "sort.order": [ "desc", "desc", "desc", "desc", "desc" ] 
-    }
-  },
-   "mappings" : {
-    "_source": {
-      "enabled": false
-    },
-    "properties" : {
-      "AdvEngineID" : {
-        "type" : "short"
+  "index_patterns": [
+    "hits"
+  ],
+  "priority": 1,
+  "template": {
+    "settings": {
+      "index": {
+        "number_of_shards": 4,
+        "number_of_replicas": 0
       },
-      "Age" : {
+      "settings": {
+        "index.mode": "logsdb"
+      }
+    },
+    "mappings": {
+      "properties": {
+        "@timestamp": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss"
+        },
+        "AdvEngineID" : {
+          "type" : "short"
+        },
+        "Age" : {
           "type" : "short"
         },
         "BrowserCountry" : {
@@ -29,7 +36,7 @@
         },
         "ClientEventTime" : {
           "type" : "date",
-          "format": "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+          "format": "yyyy-MM-dd HH:mm:ss"
         },
         "ClientIP" : {
           "type" : "integer"
@@ -60,11 +67,11 @@
         },
         "EventDate" : {
           "type" : "date",
-          "format": "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+          "format": "yyyy-MM-dd"
         },
         "EventTime" : {
-          "type" : "date",
-          "format": "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+          "type": "alias",
+          "path": "@timestamp"
         },
         "FUniqID" : {
           "type" : "long"
@@ -146,7 +153,7 @@
         },
         "LocalEventTime" : {
           "type" : "date",
-          "format": "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+          "format": "yyyy-MM-dd HH:mm:ss"
         },
         "MobilePhone" : {
           "type" : "short"
@@ -327,5 +334,5 @@
         }
       }
     }  
+  }
 }
-

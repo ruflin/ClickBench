@@ -41,8 +41,17 @@ sudo systemctl restart elasticsearch.service
 # Check Elasticsearch is alive - you should get a JSON response
 curl -sS -X GET 'http://localhost:9200'
 
-# Enable trial license for all features
-curl -sS  -X POST "https://localhost:9200/_license/start_trial?acknowledge=true"
+
+# Determine which set of files to use depending on the type of run
+if [ "$1" != "" ] && [ "$1" != "tuned" ]; then
+    echo "Error: command line argument must be one of {'', 'tuned'}"
+    exit 1
+fi
+
+if [ "$1" == "tuned" ]; then
+	# Enable trial license for all features
+	curl -sS -X POST "http://localhost:9200/_license/start_trial?acknowledge=true"
+fi
 
 ###### Create index with mappings mirroring data types in ClickHouse
 
@@ -55,10 +64,11 @@ curl -sS -X DELETE "http://localhost:9200/hits?pretty" -H 'Content-Type: applica
 # Load the mappings
 
 # Allow mapping file to be set via env var or argument
-MAPPING_FILE="${MAPPING_FILE:-mapping.json}"
-if [ $# -ge 1 ]; then
-	MAPPING_FILE="$1"
+MAPPING_FILE="mapping.json"
+if [ "$1" == "tuned" ]; then
+	MAPPING_FILE="mapping_tuned.json"
 fi
+
 echo "Using mapping file: $MAPPING_FILE"
 curl -sS -X PUT "http://localhost:9200/hits?pretty" -H 'Content-Type: application/json' -d @$MAPPING_FILE
 
