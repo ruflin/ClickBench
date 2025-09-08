@@ -45,13 +45,20 @@ curl -sS -X GET 'http://localhost:9200'
 ###### Create index with mappings mirroring data types in ClickHouse
 
 # Note: Field types were mapped as closely as possible to https://github.com/ClickHouse/ClickBench/blob/main/clickhouse/create.sql I chose "keyword" because queries are not taking advantage of freetext search.
-
 # Note: Elasticsearch does not have the concept of a primary key, but it does have an "index sorting" feature, which is intended to help in analytical use cases where sort order on disk matters. I set it to the same parameters as primary key for the ClickHouse tests https://github.com/ClickHouse/ClickBench/blob/main/clickhouse/create.sql
 
 # Make sure to delete the index if it already exists
 curl -sS -X DELETE "http://localhost:9200/hits?pretty" -H 'Content-Type: application/json'
 
-curl -sS -X PUT "http://localhost:9200/hits?pretty" -H 'Content-Type: application/json' -d @mapping.json
+# Load the mappings
+
+# Allow mapping file to be set via env var or argument
+MAPPING_FILE="${MAPPING_FILE:-mapping.json}"
+if [ $# -ge 1 ]; then
+	MAPPING_FILE="$1"
+fi
+echo "Using mapping file: $MAPPING_FILE"
+curl -sS -X PUT "http://localhost:9200/hits?pretty" -H 'Content-Type: application/json' -d @$MAPPING_FILE
 
 
 ###### Data loading (JSON dump via ES Bulk API insert)
