@@ -4,6 +4,10 @@
   },
    "mappings" : {
       "properties" : {
+        "@timestamp": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss"
+        },
         "AdvEngineID" : {
           "type" : "short"
         },
@@ -21,7 +25,7 @@
         },
         "ClientEventTime" : {
           "type" : "date",
-          "format": "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+          "format": "yyyy-MM-dd HH:mm:ss"
         },
         "ClientIP" : {
           "type" : "integer"
@@ -52,7 +56,7 @@
         },
         "EventDate" : {
           "type" : "date",
-          "format": "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+          "format": "yyyy-MM-dd"
         },
         "EventTime" : {
           "type": "alias",
@@ -138,7 +142,7 @@
         },
         "LocalEventTime" : {
           "type" : "date",
-          "format": "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+          "format": "yyyy-MM-dd HH:mm:ss"
         },
         "MobilePhone" : {
           "type" : "short"
