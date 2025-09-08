@@ -59,7 +59,8 @@ fi
 # Note: Elasticsearch does not have the concept of a primary key, but it does have an "index sorting" feature, which is intended to help in analytical use cases where sort order on disk matters. I set it to the same parameters as primary key for the ClickHouse tests https://github.com/ClickHouse/ClickBench/blob/main/clickhouse/create.sql
 
 # Make sure to delete the index if it already exists
-curl -sS -X DELETE "http://localhost:9200/hits?pretty" -H 'Content-Type: application/json'
+# TODO: make it much nicer to not have error if it fails
+curl -sS -X DELETE "http://localhost:9200/_data_stream/hits?pretty" -H 'Content-Type: application/json'
 
 # Load the mappings
 
