@@ -3,7 +3,7 @@
     "hits"
   ],
   "data_stream": {},
-  "priority": 1,
+  "priority": 100,
   "template": {
     "settings": {
       "index.mode": "logsdb"
