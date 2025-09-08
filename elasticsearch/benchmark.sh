@@ -54,7 +54,7 @@ curl -sS -X PUT "http://localhost:9200/hits?pretty" -H 'Content-Type: applicatio
 ###### Data loading (JSON dump via ES Bulk API insert)
 
 # Download the data
-wget --continue --progress=dot:giga 'https://datasets.clickhouse.com/hits_compatible/hits.json.gz'
+#wget --continue --progress=dot:giga 'https://datasets.clickhouse.com/hits_compatible/hits.json.gz'
 
 START=$(date +%s)
 
