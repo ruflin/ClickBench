@@ -11,12 +11,12 @@
         "number_of_replicas": 0,
         "sort.field": [ "CounterID", "EventDate", "UserID", "@timestamp", "WatchID" ], 
         "sort.order": [ "desc", "desc", "desc", "desc", "desc" ] 
-      },
-      "_source": {
-        "enabled": false
       }
     },
     "mappings": {
+      "_source": {
+        "enabled": false
+      },
       "properties": {
         "@timestamp": {
           "type": "date",
