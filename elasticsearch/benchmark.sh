@@ -64,14 +64,14 @@ curl -sS -X DELETE "http://localhost:9200/_data_stream/hits?pretty" -H 'Content-
 
 # Load the mappings
 
-# Allow mapping file to be set via env var or argument
-MAPPING_FILE="mapping.json"
+# Allow index templates file with mappings to be set via env var or argument
+INDEX_TEMPLATE="index_template.json"
 if [ "$1" == "tuned" ]; then
-	MAPPING_FILE="mapping_tuned.json"
+	INDEX_TEMPLATE="index_template_tuned.json"
 fi
 
-echo "Using mapping file: $MAPPING_FILE"
-curl -sS -X PUT "http://localhost:9200/_index_template/hits?pretty" -H 'Content-Type: application/json' -d @$MAPPING_FILE
+echo "Using index template file: $INDEX_TEMPLATE"
+curl -sS -X PUT "http://localhost:9200/_index_template/hits?pretty" -H 'Content-Type: application/json' -d @$INDEX_TEMPLATE
 
 
 ###### Data loading (JSON dump via ES Bulk API insert)
