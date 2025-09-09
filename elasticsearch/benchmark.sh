@@ -48,10 +48,14 @@ if [ "$1" != "" ] && [ "$1" != "tuned" ]; then
     exit 1
 fi
 
+# For the tuned option, enable the trial license
 if [ "$1" == "tuned" ]; then
 	# Enable trial license for all features
 	curl -sS -X POST "http://localhost:9200/_license/start_trial?acknowledge=true"
 fi
+
+# Print license info
+curl -sS -X GET "http://localhost:9200/_license?pretty"
 
 ###### Create index with mappings mirroring data types in ClickHouse
 
